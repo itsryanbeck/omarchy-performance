@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "id": "local.performance",
   "name": "System performance",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Local",
-  "description": "Live CPU, memory, and graphics usage in the bar",
+  "description": "Live CPU and memory usage in the bar",
   "kinds": ["bar-widget"],
   "entryPoints": {
     "barWidget": "Performance.qml"
   },
   "barWidget": {
     "displayName": "System performance",
-    "description": "Live CPU, memory, and graphics usage",
+    "description": "Live CPU and memory usage",
     "category": "System",
     "defaultSection": "right",
     "allowMultiple": false

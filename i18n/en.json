@@ -1,9 +1,5 @@
 {
   "panel.title": "System performance",
   "panel.cpu": "CPU",
-  "panel.memory": "Memory",
-  "panel.graphics": "Graphics",
-  "panel.usage": "Usage",
-  "panel.frequency": "Frequency",
-  "panel.unavailable": "Unavailable"
+  "panel.memory": "Memory"
 }

@@ -15,8 +15,6 @@ BarWidget {
   property real memoryTotalGiB: 0
   property real previousTotal: -1
   property real previousIdle: -1
-  property int gpuBusy: -1
-  property int gpuFrequency: -1
   property bool hasReading: false
 
   Commons.Translations { id: strings; directory: Qt.resolvedUrl("i18n") }
@@ -43,19 +41,15 @@ BarWidget {
         memoryUsedGiB = (memTotal - memAvailable) / 1048576
         memoryTotalGiB = memTotal / 1048576
       }
-      gpuBusy = m.gpuBusy === null ? -1 : Number(m.gpuBusy)
-      gpuFrequency = m.gpuFreq === null ? -1 : Number(m.gpuFreq)
       hasReading = true
     } catch (e) {
       // Keep the most recent valid reading if a probe is interrupted.
     }
   }
 
-  readonly property string gpuSummary: gpuBusy >= 0 ? gpuBusy + "%" : gpuFrequency >= 0 ? gpuFrequency + " MHz" : "—"
   readonly property string detailText: strings.t("panel.title") + "\n" +
     strings.t("panel.cpu") + ": " + cpuPercent + "%\n" +
-    strings.t("panel.memory") + ": " + memoryUsedGiB.toFixed(1) + " / " + memoryTotalGiB.toFixed(1) + " GiB (" + memoryPercent + "%)\n" +
-    strings.t("panel.graphics") + ": " + gpuSummary
+    strings.t("panel.memory") + ": " + memoryUsedGiB.toFixed(1) + " / " + memoryTotalGiB.toFixed(1) + " GiB (" + memoryPercent + "%)"
 
   implicitWidth: content.implicitWidth + Style.space(16)
   implicitHeight: barSize
@@ -76,14 +70,6 @@ BarWidget {
     Text {
       textFormat: Text.PlainText
       text: "RAM " + (root.hasReading ? root.memoryPercent + "%" : "—")
-      color: root.bar ? root.bar.barForeground : "white"
-      font.family: root.bar ? root.bar.fontFamily : "monospace"
-      font.pixelSize: Style.font.bodySmall
-      anchors.verticalCenter: parent.verticalCenter
-    }
-    Text {
-      textFormat: Text.PlainText
-      text: "GPU " + (root.hasReading ? root.gpuSummary : "—")
       color: root.bar ? root.bar.barForeground : "white"
       font.family: root.bar ? root.bar.fontFamily : "monospace"
       font.pixelSize: Style.font.bodySmall
